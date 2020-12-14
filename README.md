@@ -13,12 +13,11 @@ Pre-requisites
 --------------
 
 You need to know:
-- Knowledge about Fragments.
-- How to design a layout in ConstraintLayout.
-- Able to write control flow statements (if / else, when statements).
-- Able to update the UI of the app based on user input.
-- Able to add a click listener to a Button.
-
+- How to use Fragments
+- How to design a layout in ConstraintLayout
+- How to write control flow statements (if / else, when statements)
+- How to update the UI of the app based on user input
+- How to add a click listener to a Button
 
 Getting Started
 ---------------
