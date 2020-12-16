@@ -6,8 +6,7 @@ word using all the letters in the displayed scrambled word.
 This code demonstrates the Android Architecture component- ViewModel and LiveData.
 This code sample also demonstrates how to implement Data Binding with LiveData.
 
-Used in the [Android Basics with Kotlin](https://developer.android
-.com/courses/android-basics-kotlin/course) course.
+Used in the [Android Basics with Kotlin](https://developer.android.com/courses/android-basics-kotlin/course) course.
 
 
 Pre-requisites
