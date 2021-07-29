@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
-    init{
-        Log.d("GameFragment", "GameViewModel created!")
-        getNextWord()
-    }
+
     private var score = 0
     private var currentWordCount = 0
     private lateinit var _currentScrambledWord: String
@@ -15,6 +12,11 @@ class GameViewModel : ViewModel() {
     private lateinit var currentWord: String
 
     val currentScrambledWord: String get() = _currentScrambledWord
+
+    init{
+        Log.d("GameFragment", "GameViewModel created!")
+        getNextWord()
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -41,6 +43,16 @@ class GameViewModel : ViewModel() {
             _currentScrambledWord = String(tempWord)
             ++currentWordCount
             wordsList.add(currentWord)
+        }
+    }
+
+    fun nextWord(): Boolean {
+        return if (currentWordCount < MAX_NO_OF_WORDS){
+            getNextWord()
+            true
+        }
+        else {
+            false
         }
     }
 }
