@@ -17,10 +17,10 @@
 package com.example.android.unscramble.ui.game
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.unscramble.R
@@ -47,34 +47,21 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout XML file and return a binding object instance
-        binding = GameFragmentBinding.inflate(inflater, container, false)
-        Log.d("GameFragment", "GameFragment created/re-created!")
-        Log.d(
-            "GameFragment", "Word: ${viewModel.currentScrambledWord} " +
-                    "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}"
-        )
+        binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.gameViewModel = viewModel
+        binding.maxNoOfWords = MAX_NO_OF_WORDS
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
         // Update the UI
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.currentScrambledWord.observe(
-            viewLifecycleOwner, {newWord -> binding.textViewUnscrambledWord.text = newWord}
-        )
-        viewModel.score.observe(viewLifecycleOwner, { newScore -> binding.score.text = getString(R.string.score, newScore) })
-        viewModel.currentWordCount.observe(viewLifecycleOwner,
-            ({newWordCount -> binding.wordCount.text = getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)}))
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("GameFragment", "GameFragment destroyed!")
     }
 
     /*
@@ -86,9 +73,6 @@ class GameFragment : Fragment() {
 
         if (viewModel.isUserWordCorrect(playerWord)) {
             setErrorTextField(false)
-            //binding.score.text = getString(R.string.score, viewModel.score)
-            //binding.wordCount.text =
-            //    getString(R.string.word_count, viewModel.currentWordCount, MAX_NO_OF_WORDS)
             if (!viewModel.nextWord()) {
                 showFinalScoreDialog()
             }
@@ -104,7 +88,6 @@ class GameFragment : Fragment() {
      */
     private fun onSkipWord() {
         if (viewModel.nextWord()) {
-            //binding.wordCount.text = getString(R.string.word_count, viewModel.currentWordCount, MAX_NO_OF_WORDS)
             setErrorTextField(false)
         } else {
             showFinalScoreDialog()
@@ -118,10 +101,6 @@ class GameFragment : Fragment() {
     private fun restartGame() {
         viewModel.reinitializeData()
         setErrorTextField(false)
-        //binding.score.text = getString(R.string.score, viewModel.score)
-        //binding.wordCount.text =
-        //    getString(R.string.word_count, viewModel.currentWordCount, MAX_NO_OF_WORDS)
-
     }
 
     /*

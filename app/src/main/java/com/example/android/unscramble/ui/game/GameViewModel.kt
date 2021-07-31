@@ -1,6 +1,5 @@
 package com.example.android.unscramble.ui.game
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,13 +18,11 @@ class GameViewModel : ViewModel() {
     val score: LiveData<Int> get() = _score
 
     init{
-        Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
     }
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("GameFragment", "GameViewModel destroyed!")
     }
 
     private fun getNextWord() {
@@ -36,12 +33,7 @@ class GameViewModel : ViewModel() {
         while (tempWord.toString().equals(currentWord, false)) {
             tempWord.shuffle()
         }
-        Log.d("currentWord", currentWord)
-        if(wordsList.isEmpty())
-            Log.d("wordsList", "empty")
-        else{
-            Log.d("wordsList", "not empty")
-        }
+
         if (wordsList.contains(currentWord)) {
             getNextWord()
         } else {
