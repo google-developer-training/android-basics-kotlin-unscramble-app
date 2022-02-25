@@ -24,7 +24,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/game_fragment"
-        android:name="com.example.android.unscramble.ui.game.GameFragment"
+        android:name="GameFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
