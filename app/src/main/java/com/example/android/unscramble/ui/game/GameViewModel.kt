@@ -1,10 +1,8 @@
 package com.example.android.unscramble.ui.game
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
     private var _score = MutableLiveData(0)
