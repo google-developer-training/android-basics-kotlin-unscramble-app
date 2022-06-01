@@ -67,20 +67,22 @@ class GameViewModel : ViewModel() {
      */
     private fun getNextWord() {
         currentWord = allWordsList.random()
+
+        while (wordsList.contains(currentWord)) {
+            currentWord = allWordsList.random()
+        }
+
         val tempWord = currentWord.toCharArray()
         tempWord.shuffle()
 
         while (String(tempWord).equals(currentWord, false)) {
             tempWord.shuffle()
         }
-        if (wordsList.contains(currentWord)) {
-            getNextWord()
-        } else {
-            Log.d("Unscramble", "currentWord= $currentWord")
-            _currentScrambledWord.value = String(tempWord)
-            _currentWordCount.value = _currentWordCount.value?.inc()
-            wordsList.add(currentWord)
-        }
+
+        Log.d("Unscramble", "currentWord= $currentWord")
+        _currentScrambledWord.value = String(tempWord)
+        _currentWordCount.value = _currentWordCount.value?.inc()
+        wordsList.add(currentWord)
     }
 
     /*
