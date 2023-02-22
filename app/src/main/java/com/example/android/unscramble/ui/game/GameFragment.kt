@@ -71,7 +71,9 @@ class GameFragment : Fragment() {
     * After the last word, the user is shown a Dialog with the final score.
     */
     private fun onSubmitWord() {
-        val playerWord = binding.textInputEditText.text.toString()
+        val tempPlayerWord = binding.textInputEditText.text.toString()
+        val regex = "\\s+$".toRegex()
+        val playerWord = regex.replace(tempPlayerWord, "")
 
         if (viewModel.isUserWordCorrect(playerWord)) {
             setErrorTextField(false)
