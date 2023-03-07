@@ -63,6 +63,7 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
+        if (viewModel.isGameOver()) { showFinalScoreDialog() }
     }
 
     /*
