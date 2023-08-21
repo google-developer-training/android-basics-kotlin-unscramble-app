@@ -58,6 +58,9 @@ class GameViewModel : ViewModel() {
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
 
+    private var isGameOver: Boolean = false
+
+
     init {
         getNextWord()
     }
@@ -91,6 +94,7 @@ class GameViewModel : ViewModel() {
         _currentWordCount.value = 0
         wordsList.clear()
         getNextWord()
+        isGameOver = false
     }
 
     /*
@@ -119,6 +123,11 @@ class GameViewModel : ViewModel() {
         return if (_currentWordCount.value!! < MAX_NO_OF_WORDS) {
             getNextWord()
             true
-        } else false
+        } else {
+            isGameOver = true
+            false
+        }
     }
+
+    fun isGameOver() = isGameOver
 }
