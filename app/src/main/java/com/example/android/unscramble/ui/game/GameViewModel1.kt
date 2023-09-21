@@ -8,10 +8,13 @@ class GameViewModel1 :  ViewModel(){
         Log.d("GameFragment", "GameViewModel created!")
     }
 
+    private var wordsList: MutableList<String> = mutableListOf()
+    private lateinit var currentWord: String
     override fun onCleared() {
         super.onCleared()
         Log.d("GameFragment","GameViewModel destroyed!")
     }
+
 
 
 
