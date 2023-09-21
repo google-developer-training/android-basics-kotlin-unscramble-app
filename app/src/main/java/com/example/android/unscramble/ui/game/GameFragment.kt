@@ -115,6 +115,13 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        Log.d("GameFragment", "GameFragment destroyed!")
+    }
+
+
+
     /*
     * Sets and resets the text field error status.
     */
