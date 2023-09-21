@@ -19,6 +19,10 @@ class GameViewModel1 :  ViewModel(){
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()
         tempWord.shuffle()
+
+        while (String(tempWord).equals(currentWord, false)) {
+            tempWord.shuffle()
+        }
     }
 
 
