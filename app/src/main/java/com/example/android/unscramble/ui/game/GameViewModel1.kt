@@ -10,6 +10,7 @@ class GameViewModel1 :  ViewModel(){
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
+    private lateinit var _currentScrambledWord: String
     override fun onCleared() {
         super.onCleared()
         Log.d("GameFragment","GameViewModel destroyed!")
@@ -31,8 +32,12 @@ class GameViewModel1 :  ViewModel(){
             wordsList.add(currentWord)
         }
     }
-
-
+    fun nextWord(): Boolean {
+        return if (currentWordCount < MAX_NO_OF_WORDS) {
+            getNextWord()
+            true
+        } else false
+    }
 
 
 
