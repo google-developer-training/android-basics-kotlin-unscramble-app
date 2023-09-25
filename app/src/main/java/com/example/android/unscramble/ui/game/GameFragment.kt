@@ -17,6 +17,7 @@
 package com.example.android.unscramble.ui.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import android.view.View
@@ -24,6 +25,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.android.unscramble.R
 import com.example.android.unscramble.databinding.GameFragmentBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 /**
@@ -97,6 +99,13 @@ class GameFragment : Fragment() {
         val tempWord = allWordsList.random().toCharArray()
         tempWord.shuffle()
         return String(tempWord)
+    }
+
+    /*
+    * Creates and shows an AlertDialog with the final score.
+    */
+    private fun showFinalScoreDialog() {
+        MaterialAlertDialogBuilder(requireContext())
     }
 
     /*
