@@ -4,14 +4,18 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class GameViewModel1 :  ViewModel(){
+    private var _score = 0
+    val score: Int
+        get() = _score
     init {
         Log.d("GameFragment", "GameViewModel created!")
+        getNextWord()
     }
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
     private lateinit var _currentScrambledWord: String
-    override fun onCleared() {
+    override fun onCleared()
         super.onCleared()
         Log.d("GameFragment","GameViewModel destroyed!")
     }
