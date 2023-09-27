@@ -75,6 +75,7 @@ class GameFragment : Fragment() {
         // Observe the scrambledCharArray LiveData, passing in the LifecycleOwner and the observer.
         viewModel.currentScrambledWord.observe(viewLifecycleOwner,
             { newWord ->
+                binding.textViewUnscrambledWord.text = newWord
             })
     }
 
