@@ -65,9 +65,7 @@ class GameFragment : Fragment() {
         binding.skip.setOnClickListener { onSkipWord() }
         // Update the UI
         updateNextWordOnScreen()
-        //binding.score.text = getString(R.string.score, 0)
-        //binding.wordCount.text = getString(
-            //R.string.word_count, 0, MAX_NO_OF_WORDS)
+
 
         // Observe the currentScrambledWord LiveData.
         //viewModel.currentScrambledWord.observe()
@@ -123,15 +121,9 @@ class GameFragment : Fragment() {
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.you_scored, viewModel.score))
-            .setCancelable(false)
-            .setNegativeButton(getString(R.string.exit)) { _, _ ->
-                exitGame()
-            }
-            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
-                restartGame()
-            }
-            .show()
+            .setMessage(getString(R.string.you_scored, viewModel.score.value))
+        ...
+        .show()
     }
 
     /*
