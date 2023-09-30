@@ -158,7 +158,7 @@ class GameFragment : Fragment() {
         Log.d("GameFragment", "GameFragment destroyed!")
     }
 
-    /*
+
     * Sets and resets the text field error status.
     */
     private fun setErrorTextField(error: Boolean) {
