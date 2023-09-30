@@ -34,7 +34,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class GameFragment : Fragment() {
 
 
-    private val viewModel: GameViewModel1 by viewModels()
+    private val viewModel: GameViewModel by viewModels()
 
 
     // Binding object instance with access to the views in the game_fragment.xml layout
