@@ -16,7 +16,6 @@
 
 package com.example.android.unscramble.ui.game
 
-import android.app.Fragment
 import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.util.Log
@@ -63,27 +62,21 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.gameViewModel = viewModel
-
         binding.maxNoOfWords = MAX_NO_OF_WORDS
 
+        binding.lifecycleOwner = viewLifecycleOwner
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
+        if (viewModel.isGameOver()) { showFinalScoreDialog() }
         // Update the UI
         // Specify the fragment view as the lifecycle owner of the binding.
         // This is used so that the binding can observe LiveData updates
-        binding.lifecycleOwner = viewLifecycleOwner
-        updateNextWordOnScreen()
-
-
-
 
         // Observe the currentScrambledWord LiveData.
         //viewModel.currentScrambledWord.observe()
 
         //Observe the scrambledCharArray LiveData, passing in the LifecycleOwner and the observer.
-
-
 
     }
 
@@ -110,7 +103,6 @@ class GameFragment : Fragment() {
     private fun onSkipWord() {
         if (viewModel.nextWord()) {
             setErrorTextField(false)
-            updateNextWordOnScreen()
         } else {
             showFinalScoreDialog()
         }
@@ -132,8 +124,14 @@ class GameFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.you_scored, viewModel.score.value))
-        ...
-        .show()
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                exitGame()
+            }
+            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
+                restartGame()
+            }
+            .show()
     }
 
     /*
@@ -143,7 +141,6 @@ class GameFragment : Fragment() {
     private fun restartGame() {
         viewModel.reinitializeData()
         setErrorTextField(false)
-        updateNextWordOnScreen()
     }
 
     /*
@@ -171,10 +168,4 @@ class GameFragment : Fragment() {
         }
     }
 
-    /*
-     * Displays the next scrambled word on screen.
-     */
-    private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord.toString()
-    }
 }
