@@ -16,14 +16,12 @@
 
 package com.example.android.unscramble.ui.game
 
-import android.app.Fragment
 import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.android.unscramble.R
@@ -72,7 +70,9 @@ class GameFragment : Fragment() {
         // Specify the fragment view as the lifecycle owner of the binding.
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
-        updateNextWordOnScreen()
+        binding.submit.setOnClickListener { onSubmitWord() }
+        binding.skip.setOnClickListener { onSkipWord() }
+        if (viewModel.isGameOver()) { showFinalScoreDialog() }
 
 
 
@@ -109,7 +109,6 @@ class GameFragment : Fragment() {
     private fun onSkipWord() {
         if (viewModel.nextWord()) {
             setErrorTextField(false)
-            updateNextWordOnScreen()
         } else {
             showFinalScoreDialog()
         }
@@ -131,8 +130,15 @@ class GameFragment : Fragment() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
             .setMessage(getString(R.string.you_scored, viewModel.score.value))
-        ...
-        .show()
+            .setCancelable(false)
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                exitGame()
+            }
+            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
+                restartGame()
+            }
+            .show()
+
     }
 
     /*
@@ -142,7 +148,6 @@ class GameFragment : Fragment() {
     private fun restartGame() {
         viewModel.reinitializeData()
         setErrorTextField(false)
-        updateNextWordOnScreen()
     }
 
     /*
@@ -170,10 +175,4 @@ class GameFragment : Fragment() {
         }
     }
 
-    /*
-     * Displays the next scrambled word on screen.
-     */
-    private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord.toString()
-    }
 }

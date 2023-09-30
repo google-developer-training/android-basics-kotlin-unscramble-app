@@ -46,6 +46,7 @@ class GameViewModel1 :  ViewModel(){
         //super.onCleared()
         //Log.d("GameFragment","GameViewModel destroyed!")
     //}
+    private var isGameOver: Boolean = false
     private fun getNextWord() {
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()
