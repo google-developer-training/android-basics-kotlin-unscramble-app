@@ -37,16 +37,11 @@ class GameViewModel1 :  ViewModel(){
         }
     }
     init {
-        Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
     }
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("GameFragment","GameViewModel destroyed!")
-    }
     private fun getNextWord() {
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()
