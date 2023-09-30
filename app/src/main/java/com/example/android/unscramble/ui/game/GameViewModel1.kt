@@ -20,7 +20,6 @@ class GameViewModel1 :  ViewModel(){
         get() = _currentWordCount
 
     private val _currentScrambledWord = MutableLiveData<String>()
-
     val currentScrambledWord: LiveData<Spannable> = Transformations.map(_currentScrambledWord) {
         if (it == null) {
             SpannableString("")
@@ -37,11 +36,16 @@ class GameViewModel1 :  ViewModel(){
         }
     }
     init {
+        //Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
     }
 
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
+    //override fun onCleared() {
+        //super.onCleared()
+        //Log.d("GameFragment","GameViewModel destroyed!")
+    //}
     private fun getNextWord() {
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()

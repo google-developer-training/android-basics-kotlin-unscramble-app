@@ -19,7 +19,6 @@ package com.example.android.unscramble.ui.game
 import android.app.Fragment
 import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import android.view.View
@@ -53,9 +52,9 @@ class GameFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
-        Log.d("GameFragment","GameFragment created/re-created! ")
-        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
-                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
+        //Log.d("GameFragment","GameFragment created/re-created! ")
+        //Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
+                //"Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
         return binding.root
     }
 
@@ -119,11 +118,11 @@ class GameFragment : Fragment() {
     /*
      * Gets a random word for the list of words and shuffles the letters in it.
      */
-    private fun getNextScrambledWord(): String {
-        val tempWord = allWordsList.random().toCharArray()
-        tempWord.shuffle()
-        return String(tempWord)
-    }
+    //private fun getNextScrambledWord(): String {
+        //val tempWord = allWordsList.random().toCharArray()
+        //tempWord.shuffle()
+        //return String(tempWord)
+    //}
 
     /*
     * Creates and shows an AlertDialog with the final score.
@@ -153,10 +152,10 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("GameFragment", "GameFragment destroyed!")
-    }
+    //override fun onDetach() {
+        //super.onDetach()
+        //Log.d("GameFragment", "GameFragment destroyed!")
+    //}
 
     /*
     * Sets and resets the text field error status.
