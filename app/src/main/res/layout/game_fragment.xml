@@ -14,6 +14,7 @@
   ~ limitations under the License.
   -->
 
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -107,6 +108,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_instructions">
+
+            <data>
+                <variable
+                    name="gameViewModel"
+                    type="com.example.android.unscramble.ui.game.GameViewModel" />
+                <variable
+                    name="maxNoOfWords"
+                    type="int" />
+            </data>
+            <TextView
+                android:id="@+id/textView_unscrambled_word"
+
+            android:text="@{gameViewModel.currentScrambledWord}"
+            />
+            <TextView
+                android:id="@+id/word_count"
+
+            android:text="@{@string/word_count(gameViewModel.currentWordCount, maxNoOfWords)}"
+            />
+            <TextView
+                android:id="@+id/score"
+            ...
+            android:text="@{@string/score(gameViewModel.score)}"
+            ... />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_edit_text"
